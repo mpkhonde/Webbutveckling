@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Min portfolio med fokus på mina projekt och tekniska färdigheter">
+    <title>Min Portfolio</title>
+    <link rel="stylesheet" href="style.css"> <!-- Länk till CSS -->
+</head>
+<body>
+    <!-- Header med navigering -->
+    <header>
+        <nav class="navigation" aria-label="Huvudmeny">
+            <div class="menu-toggle" id="menuToggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul id="navList">
+                <li><a href="#home" aria-label="Hem">Hem</a></li>
+                <li><a href="#about" aria-label="Om mig">Om mig</a></li>
+                <li><a href="#teknik" aria-label="Teknik">Teknik</a></li>
+                <li><a href="#projects" aria-label="Projekt">Projekt</a></li>
+                <li><a href="#contact" aria-label="Kontakt">Kontakt</a></li>
+                <li><a href="#cv" aria-label="CV">CV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sektioner -->
+    <main>
+        <!-- Hem: Introduktion till portfolion -->
+        <section id="home" class="section active">
+            <div class="content-wrapper">
+                <h1>Välkommen till min portfolio</h1>
+                <p>
+                    Här kan du läsa om mina projekt, tekniska färdigheter och arbetslivserfarenhet. <br />
+                    Jag strävar efter att skapa användarvänliga och innovativa lösningar som gör skillnad.
+                </p>
+                <button onclick="location.href='#about'" class="cta-button">Läs mer om mig</button> <!-- Call-to-action-knapp -->
+            </div>
+        </section>
+
+        <!-- Om mig: Personlig introduktion och bakgrund -->
+        <section id="about" class="section">
+            <div class="content-wrapper">
+                <h2>Om mig</h2>
+                <p>
+                    Mitt namn är <strong>Moise</strong>, och jag har en bakgrund som lastbilschaufför. 
+                    Jag har alltid haft en passion för teknik och problemlösning, vilket ledde mig till beslutet att byta karriär och satsa på att bli <strong>Javautvecklare</strong>. 
+                    Jag studerar nu aktivt och bygger projekt för att stärka mina färdigheter inom mjukvaruutveckling.
+                </p>
+                <img src="./images/about.jpg" alt="Bild som representerar mig" class="about-image"> <!-- Bild om mig -->
+            </div>
+        </section>
+
+        <!-- Teknik: Detaljer om mina tekniska färdigheter och fokusområden -->
+        <section id="teknik" class="section">
+            <div class="content-wrapper">
+                <h2>Teknik jag studerar</h2>
+                <p>
+                    Jag specialiserar mig på Java-programmering och har byggt en solid grund inom objektorienterad programmering (OOP).
+                    Min inlärning fokuserar på att utveckla moderna lösningar med hjälp av populära verktyg och ramverk som Spring Boot och JDBC.
+                </p>
+                <h3>Nuvarande fokus</h3>
+                <ul>
+                    <li><a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot</a> - Utveckling av backend-system</li>
+                    <li><a href="https://docs.oracle.com/en/database/" target="_blank">JDBC och SQL</a> - Dynamisk databehandling</li>
+                    <li><a href="https://maven.apache.org/" target="_blank">Maven</a> - Projektberoenden och byggprocesser</li>
+                </ul>
+                <h3>Verktyg jag använder</h3>
+                <p>
+                    Min utvecklingsmiljö består av IntelliJ IDEA, tillsammans med Git och GitHub för versionskontroll. 
+                    Jag använder också Docker för att skapa containerbaserade utvecklingsmiljöer.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projekt: Lista över mina utvecklingsprojekt -->
+        <section id="projects" class="section">
+            <div class="content-wrapper">
+                <h2>Projekt</h2>
+                <p>Utforska några av mina senaste projekt som visar min tekniska utveckling och kreativitet:</p>
+                <ul>
+                    <li>
+                        <article>
+                            <h3>E-handelsplattform</h3>
+                            <p>En enkel och responsiv e-handelsplattform byggd med Java och Spring Boot.</p>
+                            <a href="https://github.com/username/ecommerce-platform" target="_blank">Se på GitHub</a>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <h3>Bloggplattform</h3>
+                            <p>En bloggplattform för att dela idéer och artiklar, utvecklad med RESTful API:er.</p>
+                            <a href="https://github.com/username/blog-platform" target="_blank">Se på GitHub</a>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <h3>Portfolio-webbplats</h3>
+                            <p>Min personliga portfolio för att visa upp mina projekt och tekniska färdigheter.</p>
+                            <a href="https://github.com/username/portfolio-website" target="_blank">Se på GitHub</a>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Kontakt: Formulär för att ta emot meddelanden -->
+        <section id="contact" class="section">
+            <div class="content-wrapper">
+                <h1>Kontakt</h1>
+                <p>Vill du samarbeta eller har frågor? Fyll i formuläret nedan, så återkommer jag så snart som möjligt.</p>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Namn:</label>
+                        <input type="text" id="name" name="name" placeholder="Ditt namn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-post:</label>
+                        <input type="email" id="email" name="email" placeholder="Din e-postadress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Meddelande:</label>
+                        <textarea id="message" name="message" placeholder="Ditt meddelande" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Skicka</button>
+                    <div class="form-response" id="formResponse" style="display: none; margin-top: 15px; font-weight: bold;"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- CV: Sammanställning av min arbetserfarenhet och utbildning -->
+        <section id="cv" class="section">
+            <div class="content-wrapper">
+                <h2>CV</h2>
+                <h3>Arbetserfarenhet</h3>
+                <ul>
+                    <li>Lastbilschaufför - Mer än 10 års erfarenhet av att transportera gods säkert och effektivt.</li>
+                    <li>Praktik som Javautvecklare - Erfarenhet av att bygga och optimera små applikationer.</li>
+                </ul>
+                <h3>Utbildning</h3>
+                <ul>
+                    <li>Pågående Javautbildning - Backend-utveckling och systemdesign.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript för hamburgarmeny -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navList = document.getElementById('navList');
+
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

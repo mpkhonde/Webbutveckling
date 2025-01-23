@@ -1,0 +1,80 @@
+// JavaScript för portfolio-projektet
+
+// Funktion för att hantera navigering och visa rätt sektion
+function setupNavigation() {
+    const navLinks = document.querySelectorAll('.navigation a');
+    const sections = document.querySelectorAll('.section');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault(); // Förhindra sidladdning
+
+            // Hämta målsektionens ID från länken
+            const targetId = link.getAttribute('href').substring(1);
+
+            // Visa endast målsektionen och dölj andra
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === targetId) {
+                    section.classList.add('active');
+                }
+            });
+
+            // Uppdatera URL med hash utan att ladda om sidan
+            history.pushState(null, '', `#${targetId}`);
+        });
+    });
+}
+
+// Funktion för att hantera kontaktformuläret
+function setupContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const formResponse = document.getElementById('formResponse');
+
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Förhindra sidladdning
+
+        // Hämta inmatade värden
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Enkel validering
+        if (name && email && message) {
+            formResponse.textContent = `Tack, ${name}! Ditt meddelande har skickats.`;
+            formResponse.style.color = 'green';
+            formResponse.style.display = 'block';
+
+            // Töm formuläret
+            contactForm.reset();
+        } else {
+            formResponse.textContent = 'Vänligen fyll i alla fält korrekt.';
+            formResponse.style.color = 'red';
+            formResponse.style.display = 'block';
+        }
+    });
+}
+
+// Funktion för att hantera sida vid sidladdning (hash navigering)
+function initializeSection() {
+    const hash = window.location.hash.substring(1); // Hämta hash från URL
+    const sections = document.querySelectorAll('.section');
+
+    if (hash) {
+        sections.forEach(section => {
+            section.classList.remove('active');
+            if (section.id === hash) {
+                section.classList.add('active');
+            }
+        });
+    } else {
+        document.getElementById('home').classList.add('active'); // Visa "Hem" som standard
+    }
+}
+
+// Initiera funktioner vid sidladdning
+document.addEventListener('DOMContentLoaded', () => {
+    setupNavigation();
+    setupContactForm();
+    initializeSection();
+});
