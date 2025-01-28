@@ -29,90 +29,203 @@
 
     <!-- Sektioner -->
     <main>
-        <!-- Hem: Introduktion till portfolion -->
-        <section id="home" class="section active">
+        <!-- Hem -->
+        <section id="home" class="section">
             <div class="content-wrapper">
-                <h1>Välkommen till min portfolio</h1>
+                <h1>Välkommen till min sida</h1>
                 <p>
-                    Här kan du läsa om mina projekt, tekniska färdigheter och arbetslivserfarenhet. <br />
-                    Jag strävar efter att skapa användarvänliga och innovativa lösningar som gör skillnad.
+                    Upptäck mina <strong>projekt</strong>, <strong>tekniska färdigheter</strong> och <strong>arbetslivserfarenheter</strong>. 
+                    Jag strävar efter att skapa lösningar som är både funktionella och visuellt tilltalande.
                 </p>
-                <button onclick="location.href='#about'" class="cta-button">Läs mer om mig</button> <!-- Call-to-action-knapp -->
+                <a href="#about" class="cta-button">Läs mer om mig</a>
             </div>
         </section>
+        
+        
 
-        <!-- Om mig: Personlig introduktion och bakgrund -->
+        <!-- Om mig -->
         <section id="about" class="section">
             <div class="content-wrapper">
                 <h2>Om mig</h2>
                 <p>
-                    Mitt namn är <strong>Moise</strong>, och jag har en bakgrund som lastbilschaufför. 
-                    Jag har alltid haft en passion för teknik och problemlösning, vilket ledde mig till beslutet att byta karriär och satsa på att bli <strong>Javautvecklare</strong>. 
-                    Jag studerar nu aktivt och bygger projekt för att stärka mina färdigheter inom mjukvaruutveckling.
+                    Mitt namn är <strong>Moise</strong>, och jag är en blivande Javautvecklare med en stark passion för teknik och problemlösning.
+                    Efter mer än 10 års erfarenhet som lastbilschaufför bestämde jag mig för att följa min dröm och byta karriär till programmering.
+                    Jag strävar efter att färdigställa mina studier sommaren <strong>2026</strong> och inleda en spännande resa som utvecklare.
                 </p>
-                <img src="./images/about.jpg" alt="Bild som representerar mig" class="about-image"> <!-- Bild om mig -->
+                <p>Här är vad som definierar mig och mitt mål:</p>
+                <ul>
+                    <li><strong>Pågående studier:</strong> Jag fördjupar mig i Java-programmering med fokus på backend-teknologier som Spring Boot, SQL och databasdesign.</li>
+                    <li><strong>Vision:</strong> Jag vill arbeta som en fullfjädrad Javautvecklare där jag bidrar till att utveckla effektiva och innovativa lösningar.</li>
+                    <li><strong>Problemfokuserad:</strong> Jag har ett analytiskt sinne och tycker om att lösa komplexa problem med kreativa och strukturerade lösningar.</li>
+                    <li><strong>Framtid:</strong> Efter mina studier ser jag fram emot att bli en del av ett utvecklingsteam och bidra med moderna och användarvänliga applikationer.</li>
+                </ul>
+                <p>
+                    Mitt mål är att skapa en hållbar och meningsfull karriär inom programmering. 
+                    Genom att kontinuerligt utmana mig själv och lära mig nya tekniker är jag fast besluten att göra en positiv skillnad.
+                </p>
             </div>
         </section>
+        
 
-        <!-- Teknik: Detaljer om mina tekniska färdigheter och fokusområden -->
+        
         <section id="teknik" class="section">
             <div class="content-wrapper">
                 <h2>Teknik jag studerar</h2>
                 <p>
-                    Jag specialiserar mig på Java-programmering och har byggt en solid grund inom objektorienterad programmering (OOP).
-                    Min inlärning fokuserar på att utveckla moderna lösningar med hjälp av populära verktyg och ramverk som Spring Boot och JDBC.
+                    Utforska tekniker jag arbetar med. Du kan filtrera dem baserat på kategori.
                 </p>
-                <h3>Nuvarande fokus</h3>
-                <ul>
-                    <li><a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot</a> - Utveckling av backend-system</li>
-                    <li><a href="https://docs.oracle.com/en/database/" target="_blank">JDBC och SQL</a> - Dynamisk databehandling</li>
-                    <li><a href="https://maven.apache.org/" target="_blank">Maven</a> - Projektberoenden och byggprocesser</li>
-                </ul>
-                <h3>Verktyg jag använder</h3>
-                <p>
-                    Min utvecklingsmiljö består av IntelliJ IDEA, tillsammans med Git och GitHub för versionskontroll. 
-                    Jag använder också Docker för att skapa containerbaserade utvecklingsmiljöer.
-                </p>
-            </div>
-        </section>
+                
+             <!-- Dropdown-meny för filtrering -->
+<div class="filter">
+    <label for="techFilter">Filtrera efter kategori:</label>
+    <select id="techFilter" onchange="filterTechnologies()">
+        <option value="all">Alla</option>
+        <option value="backend">Backend</option>
+        <option value="frontend">Frontend</option>
+        <option value="database">Databas</option>
+        <option value="tools">Verktyg och Ramverk</option>
+        <option value="javascript">JavaScript</option>
+    </select>
+    <button id="resetFilter" class="reset-button" onclick="resetFilters()">Återställ</button>
 
-        <!-- Projekt: Lista över mina utvecklingsprojekt -->
+    <!-- Sökfält -->
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="🔍 Sök teknik..." oninput="searchTechnologies()">
+        <button onclick="clearSearch()" id="clearSearchBtn" style="display: none;">❌</button>
+    </div>
+</div>
+
+<!-- Teknikkort -->
+<!-- Teknikkort -->
+<div class="teknik-container">
+
+    <!-- Backend -->
+    <a href="https://spring.io/projects/spring-boot" target="_blank" class="teknik-item-link" data-category="backend">
+        <article class="teknik-item">
+            <img src="Bilder/backend.jpg" alt="Backend-utveckling">
+            <h3>Backend-utveckling</h3>
+            <p>Backend handlar om att hantera serverlogik, databaser och API:er. Java och Spring Boot är populära val för att bygga robusta och skalbara backend-lösningar.</p>
+            <a href="https://spring.io/projects/spring-boot" target="_blank" class="learn-more">Läs mer →</a>
+        </article>
+    </a>
+
+    <!-- Frontend -->
+    <a href="https://css-tricks.com/" target="_blank" class="teknik-item-link" data-category="frontend">
+        <article class="teknik-item">
+            <img src="Bilder/css-full-page-background.avif" alt="Frontend-design">
+            <h3>Frontend-design</h3>
+            <p>Frontend handlar om att skapa den visuella delen av en webbplats. Med HTML, CSS och JavaScript kan du skapa interaktiva och responsiva gränssnitt.</p>
+            <a href="https://css-tricks.com/" target="_blank" class="learn-more">Läs mer →</a>
+        </article>
+    </a>
+
+    <!-- Verktyg och ramverk -->
+    <a href="https://www.jetbrains.com/idea/" target="_blank" class="teknik-item-link" data-category="tools">
+        <article class="teknik-item">
+            <img src="Bilder/Verktyg och Ramverk.jpg" alt="Verktyg och ramverk">
+            <h3>Verktyg och ramverk</h3>
+            <p>Utvecklingsverktyg som IntelliJ IDEA, Visual Studio Code och Git underlättar programmering och samarbete, medan ramverk som React och Angular förbättrar frontend-utveckling.</p>
+            <a href="https://www.jetbrains.com/idea/" target="_blank" class="learn-more">Läs mer →</a>
+        </article>
+    </a>
+
+    <!-- Databas -->
+    <a href="https://www.geeksforgeeks.org/sql-tutorial/" target="_blank" class="teknik-item-link" data-category="database">
+        <article class="teknik-item">
+            <img src="Bilder/bibl-databas.jpg" alt="Databas">
+            <h3>Databasbehandling</h3>
+            <p>SQL (Structured Query Language) används för att hantera och manipulera relationella databaser. Det möjliggör lagring, hämtning och hantering av data på ett effektivt sätt.</p>
+            <a href="https://www.geeksforgeeks.org/sql-tutorial/" target="_blank" class="learn-more">Läs mer →</a>
+        </article>
+    </a>
+
+    <!-- JavaScript -->
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="teknik-item-link" data-category="javascript">
+        <article class="teknik-item">
+            <img src="Bilder/sta-je-html.jpg" alt="JavaScript">
+            <h3>JavaScript</h3>
+            <p>JavaScript är ett av de mest använda språken för att skapa dynamiska och interaktiva webbapplikationer. Det kan användas både på frontend och backend (Node.js).</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" class="learn-more">Läs mer →</a>
+        </article>
+    </a>
+</div>
+
+
+                
+                        
         <section id="projects" class="section">
             <div class="content-wrapper">
                 <h2>Projekt</h2>
-                <p>Utforska några av mina senaste projekt som visar min tekniska utveckling och kreativitet:</p>
-                <ul>
-                    <li>
-                        <article>
+                <p>
+                    Här är några av mina mest betydelsefulla projekt som visar min förmåga att designa, utveckla och implementera lösningar för både frontend och backend. 
+                    Varje projekt är noggrant designat för att lösa specifika problem och förbättra användarupplevelsen.
+                </p>
+                <div class="project-container">
+
+                    <!-- Projekt 1: E-handelsplattform -->
+                    <article class="project-item">
+                        <img src="./Bilder/ecommerce.jpg" alt="E-handelsplattform">
+                        <div class="project-info">
                             <h3>E-handelsplattform</h3>
-                            <p>En enkel och responsiv e-handelsplattform byggd med Java och Spring Boot.</p>
-                            <a href="https://github.com/username/ecommerce-platform" target="_blank">Se på GitHub</a>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <h3>Bloggplattform</h3>
-                            <p>En bloggplattform för att dela idéer och artiklar, utvecklad med RESTful API:er.</p>
-                            <a href="https://github.com/username/blog-platform" target="_blank">Se på GitHub</a>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
+                            <p>
+                                En komplett och responsiv e-handelslösning med avancerade funktioner:
+                            </p>
+                            <ul>
+                                <li>Produktkatalog med dynamisk sökning och filtrering (kategori, pris, popularitet).</li>
+                                <li>Varukorg och kassafunktioner med betalningsintegration via API.</li>
+                                <li>Backend byggd med <strong>Java</strong> och <strong>Spring Boot</strong>.</li>
+                                <li>MySQL-databas för snabb och skalbar datalagring.</li>
+                                <li>Responsiv design för att fungera sömlöst på alla enheter.</li>
+                            </ul>
+                            <p>
+                                Detta projekt visar min förmåga att kombinera frontend och backend för att skapa en komplett användarupplevelse.
+                                <a href="https://github.com/mpkhonde" target="_blank" class="project-link">Se projektet på GitHub</a>
+                            </p>
+                        </div>
+                    </article>
+        
+                    <!-- Projekt 2: Portfolio-webbplats -->
+                    <article class="project-item">
+                        <img src="./Bilder/portfolio.jpg" alt="Portfolio-webbplats">
+                        <div class="project-info">
                             <h3>Portfolio-webbplats</h3>
-                            <p>Min personliga portfolio för att visa upp mina projekt och tekniska färdigheter.</p>
-                            <a href="https://github.com/username/portfolio-website" target="_blank">Se på GitHub</a>
-                        </article>
-                    </li>
+                            <p>
+                                En responsiv webbplats skapad för att visa upp mina tekniska färdigheter och projekt:
+                            </p>
+                            <ul>
+                                <li>Interaktiv navigering mellan sektioner som "Om mig", "Projekt" och "Kontakt".</li>
+                                <li>Kontaktformulär med validering och användarvänlig feedback.</li>
+                                <li>Modern och minimalistisk design med fokus på användarupplevelse.</li>
+                                <li>Byggd med <strong>HTML</strong>, <strong>CSS</strong>, och <strong>JavaScript</strong>.</li>
+                            </ul>
+                            <p>
+                                Projektet visar mina färdigheter inom frontend-utveckling och design. 
+                                <a href="https://github.com/mpkhonde" target="_blank" class="project-link">Se projektet på GitHub</a>
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        
+        <!--kontakt-->
+        <section id="contact-info" class="section">
+            <div class="content-wrapper">
+                <h2>Mina kontaktuppgifter</h2>
+                <p>Tveka inte att höra av Er genom någon av följande kontaktvägar:</p>
+                <ul>
+                    <li><strong>E-post:</strong> <a href="mailto:Mpkhonde@yahoo.com">Mpkhonde@yahoo.com</a></li>
+                    <li><strong>Telefon:</strong> <a href="tel:+4673 - 89 37 345">++4673 - 89 37 345</a></li>
+                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/moise" target="_blank">linkedin.com/in/moise</a></li>
+                    <li><strong>GitHub:</strong> <a href="https://github.com/mpkhonde" target="_blank">github.com/moise</a></li>
                 </ul>
             </div>
         </section>
-
-        <!-- Kontakt: Formulär för att ta emot meddelanden -->
-        <section id="contact" class="section">
-            <div class="content-wrapper">
-                <h1>Kontakt</h1>
-                <p>Vill du samarbeta eller har frågor? Fyll i formuläret nedan, så återkommer jag så snart som möjligt.</p>
-                <form id="contactForm" class="contact-form">
+        
+        <section id="contact">
+            <div class="contact-form">
+                <h2>Kontakta mig</h2>
+                <form action="#" method="post">
                     <div class="form-group">
                         <label for="name">Namn:</label>
                         <input type="text" id="name" name="name" placeholder="Ditt namn" required>
@@ -122,39 +235,111 @@
                         <input type="email" id="email" name="email" placeholder="Din e-postadress" required>
                     </div>
                     <div class="form-group">
+                        <label for="phone">Telefonnummer:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Ditt telefonnummer">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Ämne:</label>
+                        <select id="subject" name="subject">
+                            <option value="allmänt">Allmänt</option>
+                            <option value="fråga">Fråga</option>
+                            <option value="projektförfrågan">Projektförfrågan</option>
+                            <option value="annat">Annat</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="message">Meddelande:</label>
                         <textarea id="message" name="message" placeholder="Ditt meddelande" rows="5" required></textarea>
                     </div>
                     <button type="submit">Skicka</button>
-                    <div class="form-response" id="formResponse" style="display: none; margin-top: 15px; font-weight: bold;"></div>
                 </form>
             </div>
         </section>
-
-        <!-- CV: Sammanställning av min arbetserfarenhet och utbildning -->
+        
+              
+        <!--CV-->
         <section id="cv" class="section">
             <div class="content-wrapper">
-                <h2>CV</h2>
-                <h3>Arbetserfarenhet</h3>
-                <ul>
-                    <li>Lastbilschaufför - Mer än 10 års erfarenhet av att transportera gods säkert och effektivt.</li>
-                    <li>Praktik som Javautvecklare - Erfarenhet av att bygga och optimera små applikationer.</li>
-                </ul>
-                <h3>Utbildning</h3>
-                <ul>
-                    <li>Pågående Javautbildning - Backend-utveckling och systemdesign.</li>
-                </ul>
+                <h2>Curriculum Vitae</h2>
+                <p>
+                    Efter en framgångsrik karriär som lastbilschaufför har jag valt att byta bana och studerar nu Java-programmering med målet att bli en professionell utvecklare.  
+                    Mitt fokus är att kombinera min arbetslivserfarenhet med nya tekniska färdigheter för att skapa värdefulla lösningar.
+                </p>
+                
+                <!-- Arbetserfarenhet -->
+                <div class="Curriculum Vitae-section">
+                    <h3><i class="fa fa-briefcase"></i> Arbetserfarenhet</h3>
+                    <ul class="cv-list">
+                        <li>
+                            <strong>Lastbilschaufför</strong> (2012–2024)  
+                            <p>
+                                Under mer än 12 års arbete som lastbilschaufför hade jag ansvaret för att leverera gods säkert och effektivt.  
+                                Mina viktigaste ansvarsområden inkluderade:
+                            </p>
+                            <ul>
+                                <li><strong>Säker transport:</strong> Lastning, lossning och transport av gods med fokus på säkerhet och kvalitet.</li>
+                                <li><strong>Ruttplanering:</strong> Optimering av leveranser genom att planera rutter för att minska transportkostnader och tidsåtgång.</li>
+                                <li><strong>Fordonshantering:</strong> Regelbunden underhåll och felsökning av fordon för att säkerställa hög driftssäkerhet.</li>
+                                <li><strong>Kundkontakt:</strong> Effektiv kommunikation med kunder och leverantörer för att säkerställa att leveranser uppfyller förväntningar.</li>
+                            </ul>
+                            <p>
+                                Genom denna roll utvecklade jag utmärkta färdigheter i problemlösning, tidshantering och att arbeta under press.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+        
+                <!-- Utbildning -->
+                <div class="cv-section">
+                    <h3><i class="fa fa-graduation-cap"></i> Utbildning</h3>
+                    <ul class="cv-list">
+                        <li>
+                            <strong>Javautbildning</strong> (Pågående)  
+                            <p>
+                                En omfattande utbildning i Java-programmering med fokus på backend-utveckling.  
+                                Kursens nyckelområden inkluderar:
+                            </p>
+                            <ul>
+                                <li><strong>Objektorienterad programmering (OOP):</strong> Design och utveckling av modulära och återanvändbara system.</li>
+                                <li><strong>Spring Boot:</strong> Byggande av skalbara applikationer och RESTful API:er.</li>
+                                <li><strong>Databashantering:</strong> SQL och JDBC för att hantera datalagring och queries.</li>
+                                <li><strong>Systemdesign:</strong> Designmönster och bästa praxis för att bygga robusta lösningar.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Gymnasieutbildning</strong> - Teknikprogrammet  
+                            <p>
+                                Fördjupning inom datateknik och programmering, vilket gav mig en stark grund i logik och problemlösning.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+        
+                <!-- Färdigheter -->
+                <div class="cv-section">
+                    <h3><i class="fa fa-code"></i> Färdigheter</h3>
+                    <ul class="cv-list skills">
+                        <li><strong>Programmering:</strong> Java (OOP, Spring Boot), JavaScript, HTML & CSS</li>
+                        <li><strong>Databashantering:</strong> SQL, JDBC</li>
+                        <li><strong>Versionskontroll:</strong> Git, GitHub</li>
+                        <li><strong>Verktyg:</strong> IntelliJ IDEA, Docker</li>
+                        <li><strong>Problemlösning:</strong> Lösning av komplexa problem med strukturerat tänkande.</li>
+                        <li><strong>Kommunikation:</strong> Samarbete med team och kundhantering.</li>
+                    </ul>
+                </div>
             </div>
         </section>
-    </main>
+        
 
     <!-- JavaScript för hamburgarmeny -->
+     <script src="JavaScript"></script>
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const navList = document.getElementById('navList');
 
         menuToggle.addEventListener('click', () => {
             navList.classList.toggle('active');
+
         });
     </script>
 </body>

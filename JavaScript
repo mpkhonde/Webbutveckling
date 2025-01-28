@@ -1,80 +1,227 @@
-// JavaScript för portfolio-projektet
+// Funktion för att lägga till eller ta bort aktiv klass på element
+function toggleActiveClass(elements, targetId) {
+    if (!elements || !elements.length) {
+        console.warn("Inga element att iterera över.");
+        return null;
+    }
 
-// Funktion för att hantera navigering och visa rätt sektion
+    elements.forEach(element => element.classList.remove('active'));
+    const target = document.getElementById(targetId);
+    if (target) {
+        target.classList.add('active');
+        return target;
+    }
+    console.warn(`Element med ID "${targetId}" hittades inte.`);
+    return null;
+}
+
+// Funktion för att scrolla till en sektion smidigt och uppdatera URL
+function scrollToSection(targetId) {
+    if (!targetId) {
+        console.warn("Inget mål-ID tillhandahölls för scrollning.");
+        return;
+    }
+
+    const targetSection = toggleActiveClass(document.querySelectorAll('.section'), targetId);
+    if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+        history.pushState(null, '', `#${targetId}`);
+    }
+}
+
+// Funktion för att hantera navigering och klick på länkar
 function setupNavigation() {
-    const navLinks = document.querySelectorAll('.navigation a');
-    const sections = document.querySelectorAll('.section');
+    const navigationLinks = document.querySelectorAll('.navigation a');
+    if (!navigationLinks.length) {
+        console.warn("Inga navigeringslänkar hittades.");
+        return;
+    }
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault(); // Förhindra sidladdning
+    navigationLinks.forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) {
+                console.warn(`Ogiltig href för länk: ${href}`);
+                return;
+            }
 
-            // Hämta målsektionens ID från länken
-            const targetId = link.getAttribute('href').substring(1);
-
-            // Visa endast målsektionen och dölj andra
-            sections.forEach(section => {
-                section.classList.remove('active');
-                if (section.id === targetId) {
-                    section.classList.add('active');
-                }
-            });
-
-            // Uppdatera URL med hash utan att ladda om sidan
-            history.pushState(null, '', `#${targetId}`);
+            const targetId = href.substring(1); // Hämta ID från href
+            if (targetId) scrollToSection(targetId);
         });
     });
 }
 
-// Funktion för att hantera kontaktformuläret
+// Funktion för att validera formulärfält
+function validateForm(fields) {
+    let isValid = true;
+    fields.forEach(field => {
+        if (field && !field.value.trim()) {
+            field.style.borderColor = 'red';
+            isValid = false;
+        } else {
+            field.style.borderColor = ''; // Återställ om korrekt
+        }
+    });
+    return isValid;
+}
+
+// Funktion för att hantera kontaktformulär
 function setupContactForm() {
     const contactForm = document.getElementById('contactForm');
     const formResponse = document.getElementById('formResponse');
 
-    contactForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Förhindra sidladdning
+    if (!contactForm || !formResponse) {
+        console.warn("Kontaktformulär eller svarselement saknas.");
+        return;
+    }
 
-        // Hämta inmatade värden
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
+    contactForm.addEventListener('submit', event => {
+        event.preventDefault();
 
-        // Enkel validering
-        if (name && email && message) {
-            formResponse.textContent = `Tack, ${name}! Ditt meddelande har skickats.`;
+        const fields = [...contactForm.querySelectorAll('input, textarea')];
+        if (validateForm(fields)) {
+            const formData = {};
+            fields.forEach(field => (formData[field.name] = field.value.trim()));
+
+            formResponse.textContent = `Tack, ${formData.name}! Ditt meddelande har skickats.`;
             formResponse.style.color = 'green';
             formResponse.style.display = 'block';
 
-            // Töm formuläret
-            contactForm.reset();
+            console.log('Formulär skickat:', formData);
+
+            contactForm.reset(); // Återställ formuläret
+            setTimeout(() => (formResponse.style.display = 'none'), 3000);
         } else {
-            formResponse.textContent = 'Vänligen fyll i alla fält korrekt.';
+            formResponse.textContent = 'Vänligen fyll i alla obligatoriska fält korrekt.';
             formResponse.style.color = 'red';
             formResponse.style.display = 'block';
         }
     });
 }
 
-// Funktion för att hantera sida vid sidladdning (hash navigering)
+// Funktion för att visa rätt sektion vid sidladdning (hash navigering)
 function initializeSection() {
-    const hash = window.location.hash.substring(1); // Hämta hash från URL
-    const sections = document.querySelectorAll('.section');
+    const hash = window.location.hash.substring(1);
+    const defaultSection = 'home'; // Standardsektion
+    const validSections = Array.from(document.querySelectorAll('.section')).map(section => section.id);
 
-    if (hash) {
-        sections.forEach(section => {
-            section.classList.remove('active');
-            if (section.id === hash) {
-                section.classList.add('active');
-            }
-        });
+    if (!hash || !validSections.includes(hash)) {
+        toggleActiveClass(document.querySelectorAll('.section'), defaultSection);
     } else {
-        document.getElementById('home').classList.add('active'); // Visa "Hem" som standard
+        toggleActiveClass(document.querySelectorAll('.section'), hash);
     }
 }
 
-// Initiera funktioner vid sidladdning
+// Funktion för att ta bort dubbletter av "Läs mer"-länkar
+function removeDuplicateLearnMoreLinks() {
+    document.querySelectorAll('.teknik-item-link').forEach(item => {
+        const learnMoreLinks = item.querySelectorAll('.learn-more');
+        if (learnMoreLinks.length > 1) {
+            learnMoreLinks.forEach((link, index) => {
+                if (index > 0) link.remove(); // Ta bort alla utom den första
+            });
+        }
+    });
+}
+
+// Funktion för att filtrera teknikkort
+function setupTechFilter() {
+    const filterSelect = document.getElementById('techFilter');
+    const teknikItems = document.querySelectorAll('.teknik-item-link');
+    const resetButton = document.getElementById('resetFilter');
+
+    if (!filterSelect || teknikItems.length === 0) {
+        console.warn("Filterelement eller teknikobjekt saknas.");
+        return;
+    }
+
+    const filterItems = (filterValue) => {
+        teknikItems.forEach(item => {
+            const category = item.dataset.category?.toLowerCase();
+            item.style.display = (filterValue === 'all' || category === filterValue) ? 'block' : 'none';
+        });
+    };
+
+    filterSelect.addEventListener('change', () => {
+        filterItems(filterSelect.value.toLowerCase());
+    });
+
+    if (resetButton) {
+        resetButton.addEventListener('click', () => {
+            filterSelect.value = 'all';
+            filterItems('all');
+        });
+    }
+
+    filterItems('all');
+}
+
+// Funktion för att hantera scroll till toppen
+function setupBackToTopButton() {
+    const backToTopButton = document.getElementById('backToTop');
+
+    if (!backToTopButton) {
+        console.warn("Back-to-top-knappen saknas.");
+        return;
+    }
+
+    window.addEventListener('scroll', () => {
+        backToTopButton.style.display = (window.scrollY > 300) ? 'block' : 'none';
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// Funktion för sökning
+function searchTechnologies() {
+    let input = document.getElementById("searchBox").value.toLowerCase();
+    let techItems = document.querySelectorAll(".teknik-item-link");
+    let clearBtn = document.getElementById("clearSearchBtn");
+
+    clearBtn.style.display = input.length > 0 ? "inline-block" : "none";
+
+    techItems.forEach(item => {
+        let text = item.textContent.toLowerCase();
+        item.style.display = text.includes(input) ? "block" : "none";
+    });
+}
+
+function clearSearch() {
+    document.getElementById("searchBox").value = "";
+    document.getElementById("clearSearchBtn").style.display = "none";
+    document.querySelectorAll(".teknik-item-link").forEach(item => {
+        item.style.display = "block";
+    });
+}
+
+// Initiera alla funktioner vid sidladdning
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("Sidan har laddats. Initierar funktioner...");
     setupNavigation();
     setupContactForm();
     initializeSection();
+    setupTechFilter();
+    setupBackToTopButton();
+    removeDuplicateLearnMoreLinks(); // Rensar extra "Läs mer"
 });
+
+// Funktion för att filtrera teknikkort baserat på kategori
+function filterTechnologies() {
+    let filterValue = document.getElementById("techFilter").value.toLowerCase();
+    let techItems = document.querySelectorAll(".teknik-item-link");
+
+    techItems.forEach(item => {
+        let category = item.dataset.category?.toLowerCase();
+        item.style.display = (filterValue === "all" || category === filterValue) ? "block" : "none";
+    });
+}
+
+// Funktion för att återställa filter
+function resetFilters() {
+    document.getElementById("techFilter").value = "all"; // Återställ dropdown till "Alla"
+    filterTechnologies(); // Visa alla kort
+}
+
